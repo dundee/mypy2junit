@@ -7,4 +7,7 @@ upload:
 	python setup.py sdist bdist_wheel
 	python -m twine upload dist/*
 
-.PHONY: all test upload
+clean:
+	rm -rf mypy2junit.egg-info build dist __pycache__
+
+.PHONY: all test upload clean
