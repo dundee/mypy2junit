@@ -3,7 +3,7 @@ import re
 import sys
 from typing import List
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 RESULT_REGEX = re.compile(
     r'Found (?P<count>\d+) errors'

@@ -2,7 +2,7 @@
 
 Script for converting output from MyPy to Junit XML format
 
-Usage:
+## Usage
 
 ```
 mypy somedir | mypy2junit > junit.xml
@@ -11,7 +11,12 @@ mypy somedir | mypy2junit > junit.xml
 or:
 
 ```
-mypy > output.xml
-mypy2junit output.xml > junit.xml
+mypy > output.txt
+mypy2junit output.txt > junit.xml
 ```
 
+## Installation
+
+```
+pip install mypy2junit
+```
