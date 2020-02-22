@@ -3,11 +3,15 @@ import re
 import sys
 from typing import List
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 RESULT_REGEX = re.compile(
     r'Found (?P<count>\d+) errors'
 )
+REPLACES = {
+    ord('<'): '&lt;',
+    ord('"'): '&quot;',
+}
 
 
 def process_lines(lines: List[str]) -> str:
@@ -33,7 +37,7 @@ def process_lines(lines: List[str]) -> str:
 <testsuite errors="0" failures="{result['count']}" name="mypy" skips="0" tests="{result['count']}" time="0.0">"""
 
     for failure in failures:
-        msg = ':'.join(failure[3]).strip()
+        msg = ':'.join(failure[3]).strip().translate(REPLACES)
         output += f"""
     <testcase name="{failure[0]}:{failure[1]}" time="0.0">
         <failure message="{msg}" type="WARNING">{msg}</failure>
