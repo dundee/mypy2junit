@@ -1,0 +1,8 @@
+mylittlepony/mylittlepony/rpc/base.py:565: error: No overload variant of "get" of "Mapping" matches argument types "str", "Dict[<nothing>, <nothing>]"
+mylittlepony/mylittlepony/rpc/base.py:565: note: Possible overload variant:
+mylittlepony/mylittlepony/rpc/base.py:565: note:     def [_T] get(self, k: int, default: Union[str, _T]) -> Union[str, _T]
+mylittlepony/mylittlepony/rpc/base.py:565: note:     <1 more non-matching overload not shown>
+mylittlepony/mylittlepony/rpc/base.py:814: error: Name 'xmlrpclib' is not defined
+mylittlepony/mylittlepony/rpc/base.py:883: error: Need type annotation for 'status_codes_to_exceptions' (hint: "status_codes_to_exceptions: Dict[<type>, <type>] = ...")
+mylittlepony/mylittlepony/rpc/base.py:885: error: Type signature has too few arguments
+Found 154 errors in 23 files (checked 57 source files)
