@@ -3,7 +3,7 @@ import re
 import sys
 from typing import List
 
-__version__ = '1.0.2'
+__version__ = '1.1.0'
 
 RESULT_REGEX = re.compile(
     r'Found (?P<count>\d+) errors'
@@ -16,7 +16,7 @@ REPLACES = {
 
 def process_lines(lines: List[str]) -> str:
     result = {'count': 0, 'total_files': 0}
-    failures = []
+    failures = {}
     output = ''
 
     for line in lines:
@@ -31,16 +31,20 @@ def process_lines(lines: List[str]) -> str:
         type_ = type_.strip()
 
         if type_ == 'error':
-            failures.append((file_, line, type_, msg))
+            failures.setdefault(file_, []).append((line, msg))
 
     output += f"""<?xml version="1.0" encoding="utf-8"?>
-<testsuite errors="0" failures="{result['count']}" name="mypy" skips="0" tests="{result['count']}" time="0.0">"""
+<testsuite errors="0" failures="{result['count']}" name="" skips="0" tests="{result['count']}" time="0.0">"""
 
-    for failure in failures:
-        msg = ':'.join(failure[3]).strip().translate(REPLACES)
+    for test_case in failures:
         output += f"""
-    <testcase name="{failure[0]}:{failure[1]}" time="0.0">
-        <failure message="{msg}" type="WARNING">{msg}</failure>
+        <testcase name="{test_case}" time="0.0">"""
+        for failure in failures[test_case]:
+            msg = f'{test_case}:{failure[0]}: error: '
+            msg += ':'.join(failure[1]).strip().translate(REPLACES)
+            output += f"""
+            <failure message="Mypy error on {test_case}:{failure[0]}" type="WARNING">{msg}</failure>"""
+        output += """
     </testcase>"""
 
     output += """
