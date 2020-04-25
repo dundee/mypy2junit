@@ -3,7 +3,7 @@ import re
 import sys
 from typing import List
 
-__version__ = '1.2.0'
+__version__ = '1.3.0'
 
 RESULT_REGEX = re.compile(
     # errors -> error if found only one error
