@@ -19,3 +19,23 @@ def test_example():
         <failure message="Mypy error on mylittlepony/mylittlepony/rpc/base.py:885" type="WARNING">mylittlepony/mylittlepony/rpc/base.py:885: error: Type signature has too few arguments</failure>
     </testcase>
 </testsuite>"""
+
+def test_example_one():
+    lines = open('tests/mypy_one.txt').readlines()
+    res = mypy2junit.process_lines(lines)
+
+    assert res == """<?xml version="1.0" encoding="utf-8"?>
+<testsuite errors="0" failures="1" name="" skips="0" tests="1" time="0.0">
+    <testcase name="mylittlepony/mylittlepony/rpc/base.py:885" time="0.0">
+        <failure message="Mypy error on mylittlepony/mylittlepony/rpc/base.py:885" type="WARNING">mylittlepony/mylittlepony/rpc/base.py:885: error: Type signature has too few arguments</failure>
+    </testcase>
+</testsuite>"""
+
+
+def test_success():
+    lines = open('tests/mypy_success.txt').readlines()
+    res = mypy2junit.process_lines(lines)
+
+    assert res == """<?xml version="1.0" encoding="utf-8"?>
+<testsuite errors="0" failures="0" name="" skips="0" tests="0" time="0.0">
+</testsuite>"""
