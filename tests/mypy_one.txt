@@ -1,0 +1,2 @@
+mylittlepony/mylittlepony/rpc/base.py:885: error: Type signature has too few arguments
+Found 1 error in 1 file (checked 57 source files)

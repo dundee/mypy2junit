@@ -3,10 +3,11 @@ import re
 import sys
 from typing import List
 
-__version__ = '1.2.0'
+__version__ = '1.3.0'
 
 RESULT_REGEX = re.compile(
-    r'Found (?P<count>\d+) errors'
+    # errors -> error if found only one error
+    r'Found (?P<count>\d+) errors?'
 )
 REPLACES = {
     ord('<'): '&lt;',
@@ -26,6 +27,10 @@ def process_lines(lines: List[str]) -> str:
                 line
             ).groupdict()
             continue
+        
+        # example: Success: no issues found in 9 source files
+        if line.startswith('Success: no issues found in '):
+            break
 
         file_, line, type_, *msg = line.split(':')
         type_ = type_.strip()
