@@ -2,7 +2,7 @@ import mypy2junit
 
 def test_example():
     lines = open('tests/mypy.txt').readlines()
-    res = mypy2junit.process_lines(lines)
+    res, _ = mypy2junit.process_lines(lines)
 
     assert res == """<?xml version="1.0" encoding="utf-8"?>
 <testsuite errors="0" failures="154" name="" skips="0" tests="154" time="0.0">
@@ -22,7 +22,7 @@ def test_example():
 
 def test_example_one():
     lines = open('tests/mypy_one.txt').readlines()
-    res = mypy2junit.process_lines(lines)
+    res, _ = mypy2junit.process_lines(lines)
 
     assert res == """<?xml version="1.0" encoding="utf-8"?>
 <testsuite errors="0" failures="1" name="" skips="0" tests="1" time="0.0">
@@ -34,7 +34,7 @@ def test_example_one():
 
 def test_success():
     lines = open('tests/mypy_success.txt').readlines()
-    res = mypy2junit.process_lines(lines)
+    res, _ = mypy2junit.process_lines(lines)
 
     assert res == """<?xml version="1.0" encoding="utf-8"?>
 <testsuite errors="0" failures="0" name="" skips="0" tests="0" time="0.0">

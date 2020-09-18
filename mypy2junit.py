@@ -1,9 +1,9 @@
 import fileinput
 import re
 import sys
-from typing import List
+from typing import List, Tuple
 
-__version__ = '1.4.0'
+__version__ = '1.5.0'
 
 RESULT_REGEX = re.compile(
     # errors -> error if found only one error
@@ -15,28 +15,30 @@ REPLACES = {
 }
 
 
-def process_lines(lines: List[str]) -> str:
-    result = {'count': 0, 'total_files': 0}
+def process_lines(lines: List[str]) -> Tuple[str, bool]:
+    result = {'count': '0', 'total_files': '0'}
     failures = []
     output = ''
 
     for line in lines:
         if line.startswith('Found '):
-            result = re.match(
+            match = re.match(
                 RESULT_REGEX,
                 line
-            ).groupdict()
+            )
+            if match:
+                result = match.groupdict()
             continue
-        
+
         # example: Success: no issues found in 9 source files
         if line.startswith('Success: no issues found in '):
             break
 
-        file_, line, type_, *msg = line.split(':')
+        file_, line, type_, *message = line.split(':')
         type_ = type_.strip()
 
         if type_ == 'error':
-            failures.append((file_, line, type_, msg))
+            failures.append((file_, line, type_, message))
 
     output += f"""<?xml version="1.0" encoding="utf-8"?>
 <testsuite errors="0" failures="{result['count']}" name="" skips="0" tests="{result['count']}" time="0.0">"""
@@ -52,15 +54,18 @@ def process_lines(lines: List[str]) -> str:
     output += """
 </testsuite>"""
 
-    return output
+    return output, int(result['count']) == 0
 
 
 def main():
-    print(
-        process_lines(
-            list(fileinput.input())
-        )
+    output, status = process_lines(
+        list(fileinput.input())
     )
+    print(
+        output
+    )
+    if not status:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

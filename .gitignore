@@ -1,4 +1,7 @@
 __pycache__
+.eggs
+.idea
+.mypy_cache
 .pytest_cache
 mypy2junit.egg-info
 build
