@@ -1,6 +1,6 @@
 # MyPy2Junit
 
-[![Build Status](https://travis-ci.org/Dundee/mypy2junit.svg?branch=master)](https://travis-ci.org/Dundee/mypy2junit)
+[![Build Status](https://travis-ci.com/dundee/mypy2junit.svg?branch=master)](https://travis-ci.com/dundee/mypy2junit)
 
 Script for converting output from MyPy to Junit XML format
 
