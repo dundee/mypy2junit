@@ -3,7 +3,7 @@ import re
 import sys
 from typing import List, Tuple
 
-__version__ = '1.5.0'
+__version__ = '1.6.0'
 
 RESULT_REGEX = re.compile(
     # errors -> error if found only one error
@@ -47,7 +47,7 @@ def process_lines(lines: List[str]) -> Tuple[str, bool]:
         msg = f"{failure[0]}:{failure[1]}: {failure[2]}: "
         msg += ':'.join(failure[3]).strip().translate(REPLACES)
         output += f"""
-    <testcase name="{failure[0]}:{failure[1]}" time="0.0">
+    <testcase classname="{failure[0]}" name="{failure[0]}:{failure[1]}" time="0.0">
         <failure message="Mypy error on {failure[0]}:{failure[1]}" type="WARNING">{msg}</failure>
     </testcase>"""
 
