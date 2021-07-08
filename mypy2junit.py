@@ -1,3 +1,4 @@
+import argparse
 import fileinput
 import re
 import sys
@@ -57,13 +58,34 @@ def process_lines(lines: List[str]) -> Tuple[str, bool]:
     return output, int(result['count']) == 0
 
 
+parser = argparse.ArgumentParser()
+parser.add_argument('files', metavar='FILE', nargs='*', help='files to read, if empty, stdin is used')
+parser.add_argument('--output',
+                    type=str,
+                    dest='output',
+                    help='Filename to output to')
+parser.add_argument('--tee', action='store_true')
+
+
 def main():
+    args = parser.parse_args()
+    if args.tee and not args.filename:
+        print("You must specify a --filename if using --tee")
+        return -1
+
     output, status = process_lines(
-        list(fileinput.input())
+        list(fileinput.input(files=args.files if len(args.files) > 0 else ('-', )))
     )
-    print(
-        output
-    )
+
+    if args.output:
+        with open(args.output, 'w') as file:
+            file.write(output)
+
+    if not args.output or args.tee:
+        print(
+            output
+        )
+
     if not status:
         sys.exit(1)
 
