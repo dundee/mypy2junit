@@ -69,7 +69,7 @@ def main():
 
     args = parser.parse_args()
     if args.tee and not args.output:
-        print("You must specify a --filename if using --tee")
+        print("You must specify --output if using --tee")
         return -1
 
     output, status = process_lines(
