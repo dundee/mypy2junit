@@ -8,6 +8,6 @@ upload:
 	python -m twine upload dist/*
 
 clean:
-	rm -rf mypy2junit.egg-info build dist __pycache__
+	rm -rf mypy2junit.egg-info build dist __pycache__ .pytest_cache
 
 .PHONY: all test upload clean
