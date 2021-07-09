@@ -58,18 +58,17 @@ def process_lines(lines: List[str]) -> Tuple[str, bool]:
     return output, int(result['count']) == 0
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument('files', metavar='FILE', nargs='*', help='files to read, if empty, stdin is used')
-parser.add_argument('--output',
-                    type=str,
-                    dest='output',
-                    help='Filename to output to')
-parser.add_argument('--tee', action='store_true')
-
-
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('files', metavar='FILE', nargs='*', help='files to read, if empty, stdin is used')
+    parser.add_argument('--output',
+                        type=str,
+                        dest='output',
+                        help='Filename to output to')
+    parser.add_argument('--tee', action='store_true')
+
     args = parser.parse_args()
-    if args.tee and not args.filename:
+    if args.tee and not args.output:
         print("You must specify a --filename if using --tee")
         return -1
 
