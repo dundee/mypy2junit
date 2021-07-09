@@ -1,8 +1,8 @@
-# MyPy2Junit
+# MyPy2JUnit
 
 [![Build Status](https://travis-ci.com/dundee/mypy2junit.svg?branch=master)](https://travis-ci.com/dundee/mypy2junit)
 
-Script for converting output from MyPy to Junit XML format
+Script for converting output from MyPy to JUnit XML format
 
 ## Usage
 
