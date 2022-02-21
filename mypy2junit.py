@@ -13,6 +13,7 @@ RESULT_REGEX = re.compile(
 REPLACES = {
     ord('<'): '&lt;',
     ord('"'): '&quot;',
+    ord('&'): '&amp;',
 }
 
 
