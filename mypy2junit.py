@@ -49,8 +49,8 @@ def process_lines(lines: List[str]) -> Tuple[str, bool]:
         msg = f"{failure[0]}:{failure[1]}: {failure[2]}: "
         msg += ':'.join(failure[3]).strip().translate(REPLACES)
         output += f"""
-    <testcase classname="{failure[0]}" name="{failure[0]}:{failure[1]}" time="0.0">
-        <failure message="Mypy error on {failure[0]}:{failure[1]}" type="WARNING">{msg}</failure>
+    <testcase classname="{failure[0]}" name="{failure[0]}:{failure[1]}" file="{failure[0]}" line="{failure[1]}" time="0.0">
+        <failure message="Mypy error on {failure[0]}:{failure[1]}" type="WARNING" file="{failure[0]}" line="{failure[1]}">{msg}</failure>
     </testcase>"""
 
     output += """
