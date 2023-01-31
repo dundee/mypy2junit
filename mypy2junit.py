@@ -4,7 +4,7 @@ import re
 import sys
 from typing import List, Tuple
 
-__version__ = '1.8.0'
+__version__ = '1.9.0'
 
 RESULT_REGEX = re.compile(
     # errors -> error if found only one error
